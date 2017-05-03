@@ -1,6 +1,6 @@
 <?php
 
-function get_browser() {
+function _get_browser() {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $bname = 'Unknown';
         $platform = 'Unknown';
