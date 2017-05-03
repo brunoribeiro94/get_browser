@@ -1,18 +1,18 @@
 <?php
 
-function _get_browser() {
-        $u_agent = $_SERVER['HTTP_USER_AGENT'];
+function _get_browser($uagent = NULL) {
+        $u_agent = empty($uagent) ? $_SERVER['HTTP_USER_AGENT'] : $uagent;
         $bname = 'Unknown';
         $platform = 'Unknown';
         $version = "";
 
         //First get the platform?
         if (preg_match('/linux/i', $u_agent)) {
-            $platform = 'linux';
+            $platform = 'Linux';
         } elseif (preg_match('/macintosh|mac os x/i', $u_agent)) {
-            $platform = 'mac';
+            $platform = 'Mac';
         } elseif (preg_match('/windows|win32/i', $u_agent)) {
-            $platform = 'windows';
+            $platform = 'Windows';
         }
 
         // Next get the name of the useragent yes seperately and for good reason
@@ -69,12 +69,14 @@ function _get_browser() {
             $ismobiledevice = 1;
         }
         $obj = new stdClass();
+        $obj->browser_name_regex = $pattern;
         $obj->userAgent = $u_agent;
         $obj->name = $bname;
         $obj->version = $version;
         $obj->platform = $platform;
-        $obj->parent = $pattern;
-        $obj->device_type = $pattern;
-        $obj->ismobiledevice = $pattern;
+        $obj->parent = "{$bname} {$version}";
+        $obj->comment = "{$bname} {$version}";
+        $obj->device_type = $device_type;
+        $obj->ismobiledevice = $ismobiledevice;
         return $obj;
     }
