@@ -5,7 +5,7 @@ Alternative to function get_browser
 ## Simple Example
 -----------------
 ```php
-include("../autoload.php");
+include("get_browser.php");
 
 $getBrowser = _get_browser();
 print "Your browser: {$getBrowser->parent} on {$getBrowser->platform};
